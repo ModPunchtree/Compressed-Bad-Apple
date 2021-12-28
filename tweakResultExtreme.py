@@ -246,7 +246,7 @@ keepGoing = True
 while True:
     if keepGoing:
         numberOfPixels += 1
-    toggleIndex = [0 for i in range(numberOfPixels + 1)]
+        toggleIndex = [0 for i in range(numberOfPixels + 1)]
     while True:
         tweak = False
         stop = False
