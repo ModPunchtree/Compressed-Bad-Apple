@@ -2,7 +2,7 @@
 import time
 
 MacroPixels = 64
-Error = 12092
+Error = 11848
 f = open(f"{MacroPixels}_ERROR_{Error}_Bad_Apple.txt", "r")
 UniqueMacroPixels, MacroPixelIndexes = f.readlines()
 f.close()

@@ -202,9 +202,9 @@ def realError(macroPixelIndexes: list, uniqueMacroPixels: list) -> int:
     
     return error
 
-numberOfPixels = 0 
+numberOfPixels = 0
 
-bestError = 12092
+bestError = 11848
 f = open(f"64_ERROR_{bestError}_Bad_Apple.txt", "r")
 bestUniqueMacroPixels, bestMacroPixelIndexes = f.readlines()
 bestUniqueMacroPixels = eval(bestUniqueMacroPixels)
@@ -347,7 +347,8 @@ while True:
 
         if stop:
             break
-        print(f"""Number of Pixels: {numberOfPixels}
+        print(f"""
+Number of Pixels: {numberOfPixels}
 Currently on index: {toggleIndex[0]}
 Pixel Indexes: {toggleIndex[1: ]}
 Best Error: {bestError}
