@@ -40,8 +40,8 @@ def readRawData() -> tuple:
     return uniqueMacroPixels, macroPixelIndexes
 
 def difference(macroPixelOne: list, macroPixelTwo: list) -> int:
-    if random.randrange(0, 2) == 1:
-        macroPixelOne, macroPixelTwo = macroPixelTwo, macroPixelOne
+    #if random.randrange(0, 2) == 1:
+    #    macroPixelOne, macroPixelTwo = macroPixelTwo, macroPixelOne
     delta = 0
     sum1 = 0
     sum2 = 0
@@ -202,6 +202,7 @@ iteration = 0
 macroPixelIndex = 0
 toggleOptionsIndex = 0
 toggleOptionsIndex2 = 1
+toggleOptionsIndex3 = 2
 tweak = False
 
 while True:
@@ -209,6 +210,7 @@ while True:
     print(f"Tweaking index: {macroPixelIndex}")
     print(f"toggleOptionsIndex = {toggleOptionsIndex}")
     print(f"toggleOptionsIndex2 = {toggleOptionsIndex2 + toggleOptionsIndex}")
+    print(f"toggleOptionsIndex3 = {toggleOptionsIndex3 + toggleOptionsIndex2 + toggleOptionsIndex}")
     print(f"Best Error = {bestError}")
     
     toggleOptions = []
@@ -246,27 +248,37 @@ while True:
             pixel = toggleOptions[toggleOptionsIndex]
             if toggleOptionsIndex + toggleOptionsIndex2 < len(toggleOptions) - 1:
                 pixel2 = toggleOptions[toggleOptionsIndex + toggleOptionsIndex2]
+                if toggleOptionsIndex + toggleOptionsIndex2 + toggleOptionsIndex3 < len(toggleOptions) - 1:
+                    pixel3 = toggleOptions[toggleOptionsIndex + toggleOptionsIndex2 + toggleOptionsIndex3]
+                else:
+                    pixel3 = toggleOptions[0]
             else:
                 pixel2 = toggleOptions[0]
+                pixel3 = toggleOptions[1]
         else:
             pixel = toggleOptions[0]
             pixel2 = toggleOptions[toggleOptionsIndex2]
-        if toggleOptionsIndex + toggleOptionsIndex2 < len(toggleOptions) - 2:
-            toggleOptionsIndex2 += 1
+            pixel3 = toggleOptions[toggleOptionsIndex3]
+        if toggleOptionsIndex + toggleOptionsIndex2 + toggleOptionsIndex3 < len(toggleOptions) - 3:
+            toggleOptionsIndex3 += 1
         else:
-            toggleOptionsIndex2 = 1
-            toggleOptionsIndex += 1
-            if toggleOptionsIndex >= len(toggleOptions) - 1:
-                toggleOptionsIndex = 0
-                macroPixelIndex += 1
-                if macroPixelIndex >= 64:
-                    if not(tweak):
-                        break
-                    else:
-                        tweak = False
-                    macroPixelIndex = 0
+            toggleOptionsIndex3 = 2
+            if toggleOptionsIndex + toggleOptionsIndex2 < len(toggleOptions) - 2:
+                toggleOptionsIndex2 += 1
             else:
-                pass#toggleOptionsIndex += 1
+                toggleOptionsIndex2 = 1
+                toggleOptionsIndex += 1
+                if toggleOptionsIndex >= len(toggleOptions) - 1:
+                    toggleOptionsIndex = 0
+                    macroPixelIndex += 1
+                    if macroPixelIndex >= 64:
+                        if not(tweak):
+                            break
+                        else:
+                            tweak = False
+                        macroPixelIndex = 0
+                else:
+                    pass#toggleOptionsIndex += 1
                 
         """if toggleOptionsIndex >= len(toggleOptions) - 1:
             toggleOptionsIndex = 0
@@ -291,6 +303,7 @@ while True:
     if good:
         bestUniqueMacroPixels[macroPixelIndex][pixel[0]][pixel[1]] = int(bestUniqueMacroPixels[macroPixelIndex][pixel[0]][pixel[1]] == 0)
         bestUniqueMacroPixels[macroPixelIndex][pixel2[0]][pixel2[1]] = int(bestUniqueMacroPixels[macroPixelIndex][pixel2[0]][pixel2[1]] == 0)
+        bestUniqueMacroPixels[macroPixelIndex][pixel3[0]][pixel3[1]] = int(bestUniqueMacroPixels[macroPixelIndex][pixel3[0]][pixel3[1]] == 0)
     
     for frameNumber in range(416):
         for macroX in range(8):
