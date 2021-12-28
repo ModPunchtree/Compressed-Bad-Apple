@@ -202,9 +202,9 @@ def realError(macroPixelIndexes: list, uniqueMacroPixels: list) -> int:
     
     return error
 
-numberOfPixels = 0
+numberOfPixels = 2
 
-bestError = 11843
+bestError = 11789
 f = open(f"64_ERROR_{bestError}_Bad_Apple.txt", "r")
 bestUniqueMacroPixels, bestMacroPixelIndexes = f.readlines()
 bestUniqueMacroPixels = eval(bestUniqueMacroPixels)
@@ -242,6 +242,7 @@ for i in differences:
 
 iteration = 0
 keepGoing = True
+#toggleIndex = [15, 0, 1, 2]
 
 while True:
     if keepGoing:
@@ -348,6 +349,8 @@ while True:
                 elif toggleIndex[j] < 31:
                     toggleIndex[j] += 1
                     break
+                elif (j - 1 != 0) and (toggleIndex[j - 1] + 1 < 31):
+                    toggleIndex[j] = toggleIndex[j - 1] + 1
                 else:
                     toggleIndex[j] = 0
 
