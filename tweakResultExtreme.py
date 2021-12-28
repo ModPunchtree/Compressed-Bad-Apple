@@ -340,6 +340,7 @@ while True:
                     if not(tweak):
                         if not(keepGoing):
                             toggleIndex = [0 for i in range(numberOfPixels + 1)]
+                            keepGoing = True
                         stop = True
                         break
                     else:
